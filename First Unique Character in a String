@@ -1,0 +1,15 @@
+from collections import OrderedDict
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        od=OrderedDict()
+        n=len(s)
+        for i in range(n):
+            if s[i] not in od:
+                od[s[i]]=(1,i)
+            else:
+                od[s[i]]=((od[s[i]][0])+1,i)
+        # print(od)
+        for k,v in od.items():
+            if(v[0]==1):
+                return v[1]
+        return -1
