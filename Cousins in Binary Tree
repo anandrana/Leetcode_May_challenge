@@ -1,0 +1,41 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
+        def height(root,node,h):
+            if(root is None):
+                return 0
+            if(root.val==node):
+                return h
+            #let the check the node  in left subtree
+            level=height(root.left,node,h+1)
+            
+            if(level!=0):
+                return level
+            #if the element is not in left subtree 
+            return height(root.right,node,h+1)
+        
+        def check_for_parent(root,x,y):
+            if(root is None):
+                return False
+            return ((root.left!=None and root.right!=None and root.left.val==x and root.right.val==y) or (root.left!=None and root.right!=None and root.left.val==y and root.right.val==x) or (check_for_parent(root.left,x,y)) or (check_for_parent(root.right,x,y)))
+        
+        
+        x1=height(root,x,0)
+        x2=height(root,y,0)
+        
+        # print(x1,x2)
+        if(x1!=x2):
+            return False
+        else:
+            if(check_for_parent(root,x,y)):
+                return False
+            else:
+                return True
+            
+        
+        
