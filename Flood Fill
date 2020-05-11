@@ -1,0 +1,32 @@
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        n=len(image)
+        m=len(image[0])
+        dp=[[0 for i in range(m)]for j in range(n)]
+        visited=[[False for i in range(m)]for j in range(n)]
+        for i in range(n):
+            for j in range(m):
+                dp[i][j]=image[i][j]
+        
+        c=image[sr][sc]
+        def is_safe(x,y):
+            return (x>=0 and x<n and y>=0 and y<m and visited[x][y]==False and image[x][y]==c )
+        def bfs(sr,sc,image,newColor,dp,visited):
+            q=[]
+            q.append((sr,sc))
+            visited[sr][sc]=True
+            rows=[0,-1,0,1]
+            cols=[-1,0,1,0]
+            dp[sr][sc]=newColor
+            while q:
+                u,v=q.pop()
+                for i in range(4):
+                    if(is_safe(u+rows[i],v+cols[i])):
+                        q.append((u+rows[i],v+cols[i]))
+                        visited[u+rows[i]][v+cols[i]]=True
+                        dp[u+rows[i]][v+cols[i]]=newColor
+                
+        bfs(sr,sc,image,newColor,dp,visited)
+        return dp
+        
+        
