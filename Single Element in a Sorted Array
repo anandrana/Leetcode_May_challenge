@@ -1,0 +1,29 @@
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        s=0
+        e=len(nums)-1
+        while(s<=e):
+            mid=(s+e)//2
+            # print(mid)
+            
+            if(mid==0 or mid==len(nums)-1):
+                return nums[mid]
+            elif(nums[mid]==nums[mid-1]):
+                n=len(nums[:mid-1])
+                # print(n)
+                if(n%2==0):
+                    s=mid+1
+                else:
+                    e=mid-1
+                # print(e)
+            elif(nums[mid]==nums[mid+1]):
+                n=len(nums[:mid])
+                if(n%2==0):
+                    s=mid+1
+                else:
+                    e=mid-1
+            else:
+                return nums[mid]
+            # print(s,e)
+            
+        
