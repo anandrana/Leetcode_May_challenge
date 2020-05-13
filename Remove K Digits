@@ -1,0 +1,48 @@
+class Solution:
+    def removeKdigits(self, num: str, k: int) -> str:
+        if(len(num)<=k):
+            return '0'
+        
+        list1=[int(x) for x in num]
+        # print(list1)
+        
+        count=0
+        x=0
+        t=0
+        while(count<k):
+            flag=0
+            x=0
+            for i in range(len(list1)-1):
+                # if(list1[i]==0):
+                #     list1.pop(i)
+                # else:
+                    if(list1[i]>list1[i+1]):
+                        x=i
+                        flag=1
+                        t+=1
+                        break
+            if(flag==1):        
+                list1.pop(x)
+            count+=1
+            # print(list1)
+        res=[]
+        m=k-t
+        if(m==0):
+            pass
+        else:
+            list1=list1[:-m]
+        
+        for i in range(len(list1)):
+            if(i==0 and list1[i]==0):
+                flag=1
+            elif(list1[i]==0 and flag==1):
+                pass
+            else:
+                flag=2
+                res.append(str(list1[i]))
+        res=''.join(res)
+        if(len(res)==0):
+            return '0'
+        return res
+    
+            
