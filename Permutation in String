@@ -1,0 +1,20 @@
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if(len(s1)>len(s2)):
+            return False
+        hash_s1=sum(hash(ch) for ch in s1)
+        hash_s2=sum(hash(ch) for ch in s2[:len(s1)-1])
+        
+        x1=[""]+list(s2)
+        x2=s2[len(s1)-1:]
+        
+        #print(x1,x2)
+        x=zip(x1,x2)
+        for idx,(ch_out,ch_in) in enumerate(x):
+            hash_s2+=hash(ch_in)-hash(ch_out)
+            
+            if hash_s2==hash_s1:
+                return True
+        return False
+    
+            
