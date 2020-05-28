@@ -1,0 +1,24 @@
+class Solution:
+    def countBits(self, num: int) -> List[int]:
+        
+        def count_set_bit(n):
+            count=0
+            while(n>0):
+                count+=(n&1)
+                n=n>>1 
+            return count
+        res=[]
+        i=0
+        while(i<=num):
+            # print(i)
+            if((i&1)==0 and i<num):
+                c=count_set_bit(i)
+                res.append(c)
+                res.append(c+1)
+                i+=1
+            else:
+                res.append(count_set_bit(i))
+            i+=1
+        return res
+    
+        
