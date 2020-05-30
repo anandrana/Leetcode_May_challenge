@@ -1,0 +1,16 @@
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        res=[]
+        for i in points:
+            a=i[0]*i[0]
+            b=i[1]*i[1]
+            res.append((i,(a+b)))
+        
+        list1=sorted(res,key=lambda x:x[1])
+        # print(list1[:K])
+        list2=[]
+        for i in list1[:K]:
+            list2.append(i[0])
+        return list2
+            
+        
